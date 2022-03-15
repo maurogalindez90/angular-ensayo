@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,8 +7,24 @@ import { MainComponent } from './main.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
-import { HttpService } from './services/http.service';
 import { BandsTableComponent } from './components/bands-table/bands-table.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () => keycloak.init({
+    config: {
+      url: 'http://localhost:8080/admin',
+      realm: 'angular-web',
+      clientId: 'angular-web-client'
+    },
+    initOptions: {
+      flow: 'implicit',
+      onLoad: 'check-sso',
+      silentCheckSsoRedirectUri:
+        window.location.origin + '/assets/silent-check-sso.html'
+    }
+  });
+}
 
 @NgModule({
   declarations: [
@@ -22,6 +38,7 @@ import { BandsTableComponent } from './components/bands-table/bands-table.compon
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    KeycloakAngularModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {
@@ -63,7 +80,12 @@ import { BandsTableComponent } from './components/bands-table/bands-table.compon
       }
     })
   ],
-  providers: [HttpService],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  }],
   bootstrap: [MainComponent]
 })
 export class AppModule { }

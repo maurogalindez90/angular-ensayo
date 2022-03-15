@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BandsTableComponent } from './components/bands-table/bands-table.component';
 import { MainComponent } from './main.component';
+import { AuthGuard } from './services/authGuard.service';
 
 const routes: Routes = [
-  { path: '', component: BandsTableComponent }
+  { path: '', component: BandsTableComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
