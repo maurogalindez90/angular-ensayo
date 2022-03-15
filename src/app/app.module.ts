@@ -11,20 +11,21 @@ import { BandsTableComponent } from './components/bands-table/bands-table.compon
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 function initializeKeycloak(keycloak: KeycloakService) {
-  return () => keycloak.init({
-    config: {
-      url: 'http://localhost:8080/admin',
-      realm: 'angular-web',
-      clientId: 'angular-web-client'
-    },
-    initOptions: {
-      flow: 'implicit',
-      onLoad: 'check-sso',
-      silentCheckSsoRedirectUri:
-        window.location.origin + '/assets/silent-check-sso.html'
-    }
-  });
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8080',
+        realm: 'angular-web',
+        clientId: 'angular-web-client'
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      }
+    });
 }
+
 
 @NgModule({
   declarations: [
