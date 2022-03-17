@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent implements OnInit {
+  public keycloakService: KeycloakService
 
-  constructor() { }
+  constructor() {
+    this.keycloakService = new KeycloakService();
+   }
 
   ngOnInit(): void {
   }
 
+  public logout = async () => {
+    try {
+      console.log('logout was called');
+      let pepe = await this.keycloakService.logout('http://localhost:4200');
+      console.log(pepe);
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }
