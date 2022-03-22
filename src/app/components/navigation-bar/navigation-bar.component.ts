@@ -7,20 +7,15 @@ import { KeycloakService } from 'keycloak-angular';
   styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent implements OnInit {
-  public keycloakService: KeycloakService
 
-  constructor() {
-    this.keycloakService = new KeycloakService();
-   }
+  constructor(private keycloakService: KeycloakService) {}
 
   ngOnInit(): void {
   }
 
   public logout = async () => {
     try {
-      console.log('logout was called');
-      let pepe = await this.keycloakService.logout('http://localhost:4200');
-      console.log(pepe);
+      await this.keycloakService.logout('http://localhost:4200');
     } catch (e) {
       console.log(e)
     }

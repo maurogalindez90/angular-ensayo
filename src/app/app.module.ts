@@ -7,31 +7,15 @@ import { MainComponent } from './main.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
-import { BandsTableComponent } from './components/bands-table/bands-table.component';
+import { InboxComponent } from './components/inbox/inbox.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-
-function initializeKeycloak(keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: {
-        url: 'http://localhost:8080',
-        realm: 'angular-web',
-        clientId: 'angular-web-client'
-      },
-      initOptions: {
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
-      }
-    });
-}
-
+import { initializeKeycloak } from './services/keycloak-config.service';
 
 @NgModule({
   declarations: [
     MainComponent,
     NavigationBarComponent,
-    BandsTableComponent
+    InboxComponent
   ],
   imports: [
     MaterialModule,

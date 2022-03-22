@@ -1,0 +1,23 @@
+table { 
+    border-collapse: collapse;
+    display: inline-table;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table td, table th {
+    padding: 3px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table th {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}

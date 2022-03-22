@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BandsTableComponent } from './components/bands-table/bands-table.component';
+import { InboxComponent } from './components/inbox/inbox.component';
 import { AuthGuard } from './services/authGuard.service';
 
 const routes: Routes = [
-  { path: '', component: BandsTableComponent, canActivate: [AuthGuard] }
+  { path: '', component: InboxComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

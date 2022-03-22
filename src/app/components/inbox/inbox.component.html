@@ -1,0 +1,76 @@
+<div class="container col-md-12">
+    <div class="jiralike-container">
+        <div class="col-md-12 col-no-margins">
+        <form [formGroup]="inboxFiltersForm"id="inboxFiltersForm">
+            <div class="col-md-12" style="padding: 40px; text-align: center; border-radius: 90%;">
+                <mat-form-field class="col-md-3">
+                    <mat-label> Estado </mat-label>
+                    <mat-select formControlName="state" id="stateSelect">
+                        <mat-option [value]="''"> Todos </mat-option>
+                        <mat-option *ngFor="let state of states" [value]="state.id"> {{ state.description }} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button type="button" style="margin-left: 20px" mat-mini-fab color="primary" aria-label="icon-button with a search icon" id="inboxSearchButton"
+                (click)="getAuthorizations()"><mat-icon>search</mat-icon>
+        </button>
+            </div>
+        </form>
+            <table mat-table [dataSource]="authorizationsTableDatasource" class="mat-elevation-z8">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Nro de gestión </th>
+                    <td mat-cell *matCellDef="let authorization"> <span> {{authorization.id}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="authorizationDate">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de pedido </th>
+                    <td mat-cell *matCellDef="let authorization"> <span> {{authorization.authorizationDate | date: 'dd/MM/yyyy'}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="affiliateId">
+                    <th mat-header-cell *matHeaderCellDef> Nro de afiliado </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.affiliate"> {{authorization.affiliate.id}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="affiliateName">
+                    <th mat-header-cell *matHeaderCellDef> Nombre y apellido </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.affiliate?.name"> {{authorization.affiliate.name}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="group">
+                    <th mat-header-cell *matHeaderCellDef> Grupo </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.group"> {{authorization.group.description}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="disability">
+                    <th mat-header-cell *matHeaderCellDef> Discapacidad </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.disability"> <mat-icon style="color: green; font-weight: bold;">check</mat-icon> </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="judicialized">
+                    <th mat-header-cell *matHeaderCellDef> Judicializado </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.judicialized"> <mat-icon style="color: green; font-weight: bold;">check</mat-icon> </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="os">
+                    <th mat-header-cell *matHeaderCellDef> Obra social </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.os"> {{authorization.os}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="state">
+                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                    <td mat-cell *matCellDef="let authorization"> <span *ngIf="authorization.state"> {{authorization.state.description}} </span> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element"> <span> </span> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="authorizationsTableColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: authorizationsTableColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[2, 3, 20]" showFirstLastButtons [length]="authorizationsServiceMockResponse.length"
+            [pageSize]="limit" [pageIndex]="offset" (page)="getAuthorizations($event)"></mat-paginator>
+        </div>
+    </div>
+</div>
