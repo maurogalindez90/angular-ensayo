@@ -6,3 +6,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-select-value-text { font-weight:200; }
+
+@media screen and (max-width: 800px) {
+    .base-margin{ margin: 0 1rem; }
+}

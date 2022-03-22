@@ -2,7 +2,6 @@ table {
     border-collapse: collapse;
     display: inline-table;
     width: 100%;
-    overflow-x: auto;
 }
 
 table td, table th {
@@ -17,7 +16,25 @@ tr:nth-child(even) {
 }
 
 table th {
-    background-color: blue;
+    background-color: #3B51B5;
     color: white;
     font-weight: bold;
 }
+
+@media screen and (max-width: 600px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+
+    .mat-paginator-container::ng-deep {
+        margin-top: 20px;
+    }
+
+}
+    

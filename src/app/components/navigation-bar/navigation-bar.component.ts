@@ -8,9 +8,18 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class NavigationBarComponent implements OnInit {
 
+  user: string = '';
+  role: string = 'Auditor 1';
+
+
   constructor(private keycloakService: KeycloakService) {}
 
   ngOnInit(): void {
+    this.initializeUserOptions();
+  }
+
+  private initializeUserOptions() {
+    this.user = this.keycloakService.getUsername();
   }
 
   public logout = async () => {

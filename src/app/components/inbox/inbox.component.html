@@ -15,6 +15,7 @@
         </button>
             </div>
         </form>
+        <section class="table-responsive">
             <table mat-table [dataSource]="authorizationsTableDatasource" class="mat-elevation-z8">
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> Nro de gestión </th>
@@ -69,8 +70,11 @@
                 <tr mat-header-row *matHeaderRowDef="authorizationsTableColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: authorizationsTableColumns;"></tr>
             </table>
+        </section>
+        <section class="pagination-responsive">
             <mat-paginator [pageSizeOptions]="[2, 3, 20]" showFirstLastButtons [length]="authorizationsServiceMockResponse.length"
             [pageSize]="limit" [pageIndex]="offset" (page)="getAuthorizations($event)"></mat-paginator>
+        </section>
         </div>
     </div>
 </div>

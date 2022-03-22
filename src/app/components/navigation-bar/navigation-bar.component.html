@@ -1,4 +1,14 @@
-<div class="col-md-12" id="logoBar">
-    <b id="medicus" style="margin-left: 20px;"> MEDICUS </b>
-    <button mat-raised-button id="logoutButton" (click)="logout()"> logout </button>
-</div>
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Medicus</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <div class="description-user">
+        <h6>{{user}}</h6>
+        <p>{{role}}</p>
+    </div>
+  </mat-toolbar>
